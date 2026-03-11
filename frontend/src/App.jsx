@@ -7,9 +7,9 @@ function App() {
     const [selectedCountry, setSelectedCountry] = useState(null);
 
     useEffect(() => {
-        fetch("http://localhost:8080/api/countries")
+        fetch("http://localhost:8080/countries")
             .then((res) => res.json())
-            .then((data) => setCountries(data))
+            .then((data) => setCountries(Array.isArray(data) ? data : []))
             .catch((err) => console.error(err));
     }, []);
 
@@ -23,6 +23,7 @@ function App() {
     return (
         <div className="App">
             <h1>Countries</h1>
+
             <input
                 type="text"
                 placeholder="Search by name, capital, region..."
